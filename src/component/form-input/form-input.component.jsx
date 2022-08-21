@@ -8,6 +8,7 @@ const FormInput = ({label, ...otherProps}) => {
             {/* use && to determine whether there is label or not */}
             {label && (
                 <label className = {`${otherProps.value.length ? 'shrink' : ''} form-input-label`}>{label}</label>
+                // <label>{label}</label>
             )}
         </div>
     );
