@@ -1,15 +1,16 @@
-.sign-in-container {
+.sign-up-container {
     display: flex;
     flex-direction: column;
     width: 380px;
-    
+  
     h2 {
-        margin: 10px 0;
+      margin: 10px 0;
     }
-}
+  
+    .buttons-container {
+      display: flex;
+      flex: auto auto auto;
+      justify-content: space-between;
+    }
+  }
 
-.button-container {
-    display: flex;
-    // flex-direction: column;
-    justify-content: space-between;
-}

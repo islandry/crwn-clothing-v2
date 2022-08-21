@@ -46,8 +46,8 @@ const SignInForm = () =>{
     };
 
     return (
-        <div className = "sign-in-container">
-            <h2>Don't have an account?</h2>
+        <div className = "sign-up-container">
+            <h2>Already have an account?</h2>
             <span>Sign up with your email and password</span>
             <form onSubmit = {onSubmitHandler}>              
                 <FormInput
@@ -66,9 +66,9 @@ const SignInForm = () =>{
                     value = {password} 
                     onChange = {onChangeHandler}
                 />
-                <div className = "button-container">
+                <div className = "buttons-container">
                     <Button buttonType = "" type = "submit">Sign In</Button>
-                    <Button buttonType = "google" onClick = {logGoogleUser}>Google Sign In</Button>
+                    <Button buttonType = "google" type = "button" onClick = {logGoogleUser}>Google Sign In</Button>
                 </div>
             </form>
         </div>
