@@ -1,7 +1,7 @@
-import {auth, createUserDocumentFromAuth, signInWithGooglePopup, signInWithGoogleRedirect } from "../../utils/firebase/firebase.component";
+// import {auth, createUserDocumentFromAuth, signInWithGooglePopup, signInWithGoogleRedirect } from "../../utils/firebase/firebase.component";
 
-import { useEffect } from "react";
-import { getRedirectResult } from "firebase/auth";
+// import { useEffect } from "react";
+// import { getRedirectResult } from "firebase/auth";
 
 import './Auth.style.scss';
 
