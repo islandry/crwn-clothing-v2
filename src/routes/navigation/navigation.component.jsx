@@ -18,6 +18,7 @@ const Navigation = () => {
 
   return (
     <Fragment>
+      {/* <Outlet /> */}
       <div className='navigation'>
         <Link className='logo-container' to='/'>
           <CrwnLogo className='logo' />
