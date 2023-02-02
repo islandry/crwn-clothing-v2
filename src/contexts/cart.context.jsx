@@ -38,6 +38,13 @@ const removeCartItem = (cartItems, cartItemToRemove) => {
 const clearCartItem = (cartItems, cartItemToClear) =>
   cartItems.filter((cartItem) => cartItem.id !== cartItemToClear.id);
 
+const USER_ACTION_TYPES = {
+  TOGGLE_CART: 'TOGGLE_CART',
+  SET_CART_ITEM: 'SET_CART_ITEM',
+  SET_CART_COUNT: 'SET_CART_COUNT',
+  SET_CART_TOTAL: 'SET_CART_TOTAL'
+}
+
 const INITIAL_STATE = {
   isCartOpne: false,
   cartItems: [],
@@ -48,6 +55,9 @@ const INITIAL_STATE = {
 const cartReducer = (state, action) => {
   const {type, payload} = action;
   
+  //it is best not to include helper functions in the reducer switch
+  //this is for better migrating reducer to redux store
+  /*
   switch(type){
     case 'TOGGLE_CART':
       return {
@@ -83,6 +93,15 @@ const cartReducer = (state, action) => {
     default:
       return state;
   };
+  */
+  switch(type){
+    case USER_ACTION_TYPES.SET_CART_ITEM:
+      return {
+        ...state,
+        payload
+      } 
+  }
+
 }
 
 export const CartContext = createContext({
@@ -97,16 +116,17 @@ export const CartContext = createContext({
 });
 
 export const CartProvider = ({ children }) => {
-  //const [isCartOpen, setIsCartOpen] = useState(false);
-  //const [cartItems, setCartItems] = useState([]);
-  //const [cartCount, setCartCount] = useState(0);
-  //const [cartTotal, setCartTotal] = useState(0);
-
   const [state, dispatch] = useReducer(cartReducer, INITIAL_STATE);
 
-  const setIsCartOpen = () => dispatch({type: 'TOGGLE_CART'});
-  
-  const addItemToCart = (productToAdd) => dispatch({type: "ADD_ITEM", payload: productToAdd});
+  const setIsCartOpen = () => dispatch({type: USER_ACTION_TYPES.TOGGLE_CART});
+  const setCartItems = (product, addOrRemoveOrClear) => {
+    if(addOrRemoveOrClear === 'add'){
+      addCartItem
+    } 
+
+
+  }
+  const addItemToCart = (productToAdd) => setCartItems(productToAdd, 'add');
   const removeItemToCart = (productToRemove) => dispatch({type: "REMOVE_ITEM", payload: productToRemove});
   const clearItemFromCart = (productToClear) => dispatch({type: "CLEAR_ITEM", payload: productToClear});
   
