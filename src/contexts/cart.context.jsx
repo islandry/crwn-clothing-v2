@@ -46,7 +46,7 @@ const USER_ACTION_TYPES = {
 }
 
 const INITIAL_STATE = {
-  isCartOpen: false,
+  // isCartOpen: false,
   cartItems: [],
   cartCount: 0,
   cartTotal: 0
@@ -96,6 +96,7 @@ const cartReducer = (state, action) => {
   */
   switch(type){
     case USER_ACTION_TYPES.SET_CART_ITEM:
+      console.log('dispatched');
       return {
         ...state,
         payload
@@ -118,7 +119,8 @@ export const CartContext = createContext({
 export const CartProvider = ({ children }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
 
-  const [{ cartItems, cartCount, cartTotal }, dispatch] = useReducer(cartReducer, INITIAL_STATE);
+  const [state, dispatch] = useReducer(cartReducer, INITIAL_STATE);
+  console.log(state);
 
   // const setIsCartOpen = () => dispatch({type: USER_ACTION_TYPES.TOGGLE_CART});
   
@@ -131,11 +133,14 @@ export const CartProvider = ({ children }) => {
         cartCount: newCount,
         cartTotal: newTotal
       };
+      console.log("pl", pl);
       dispatch({type: USER_ACTION_TYPES.SET_CART_ITEM, payload: pl});
   }
 
   const addItemToCart = (productToAdd) => {
+    console.log("add item to cart")
     const newCartItems = addCartItem(cartItems, productToAdd);
+    console.log(newCartItems);
     setCartItems(newCartItems);
   };
   const removeItemToCart = (productToRemove) => {
@@ -147,15 +152,15 @@ export const CartProvider = ({ children }) => {
     setCartItems(newCartItems);
   };
   
-  // const { isCartOpen, cartItems, cartCount, cartTotal } = state;
+  const { cartItems, cartCount, cartTotal } = state;
 
-  useEffect(() => {
-    dispatch({type: "CART_COUNT"});
-  }, [cartItems]);
+  // useEffect(() => {
+  //   dispatch({type: "CART_COUNT"});
+  // }, [cartItems]);
 
-  useEffect(() => {
-    dispatch({type: "CART_TOTAL"});
-  }, [cartItems]);
+  // useEffect(() => {
+  //   dispatch({type: "CART_TOTAL"});
+  // }, [cartItems]);
 
   const value = {
     isCartOpen,
