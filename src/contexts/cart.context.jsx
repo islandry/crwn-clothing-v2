@@ -46,7 +46,7 @@ const USER_ACTION_TYPES = {
 }
 
 const INITIAL_STATE = {
-  // isCartOpen: false,
+  isCartOpen: false,
   cartItems: [],
   cartCount: 0,
   cartTotal: 0
@@ -57,6 +57,7 @@ const cartReducer = (state, action) => {
   
   //it is best not to include helper functions in the reducer switch
   //this is for better migrating reducer to redux store
+  
   /*
   switch(type){
     case 'TOGGLE_CART':
@@ -94,12 +95,14 @@ const cartReducer = (state, action) => {
       return state;
   };
   */
+
   switch(type){
     case USER_ACTION_TYPES.SET_CART_ITEM:
-      console.log('dispatched');
+      return payload;
+    case USER_ACTION_TYPES.TOGGLE_CART:
       return {
         ...state,
-        payload
+        isCartOpen: !state.isCartOpen
       }
   }
 
@@ -117,30 +120,27 @@ export const CartContext = createContext({
 });
 
 export const CartProvider = ({ children }) => {
-  const [isCartOpen, setIsCartOpen] = useState(false);
+  //const [isCartOpen, setIsCartOpen] = useState(false);
 
   const [state, dispatch] = useReducer(cartReducer, INITIAL_STATE);
-  console.log(state);
-
-  // const setIsCartOpen = () => dispatch({type: USER_ACTION_TYPES.TOGGLE_CART});
+  
+  const setIsCartOpen = () => dispatch({type: USER_ACTION_TYPES.TOGGLE_CART});
   
   const setCartItems = (newCartItems) => {
       const newCount = newCartItems.reduce((acc, item)=> acc + item.quantity, 0);
       const newTotal = newCartItems.reduce((acc, item)=> acc + item.price * item.quantity, 0);
       const pl = {
-        //isCartOpen: isCartOpen,
         cartItems: newCartItems,
         cartCount: newCount,
         cartTotal: newTotal
       };
-      console.log("pl", pl);
       dispatch({type: USER_ACTION_TYPES.SET_CART_ITEM, payload: pl});
   }
 
   const addItemToCart = (productToAdd) => {
-    console.log("add item to cart")
+    //console.log("add item to cart")
     const newCartItems = addCartItem(cartItems, productToAdd);
-    console.log(newCartItems);
+    //console.log(newCartItems);
     setCartItems(newCartItems);
   };
   const removeItemToCart = (productToRemove) => {
@@ -152,15 +152,7 @@ export const CartProvider = ({ children }) => {
     setCartItems(newCartItems);
   };
   
-  const { cartItems, cartCount, cartTotal } = state;
-
-  // useEffect(() => {
-  //   dispatch({type: "CART_COUNT"});
-  // }, [cartItems]);
-
-  // useEffect(() => {
-  //   dispatch({type: "CART_TOTAL"});
-  // }, [cartItems]);
+  const { isCartOpen, cartItems, cartCount, cartTotal } = state;
 
   const value = {
     isCartOpen,
