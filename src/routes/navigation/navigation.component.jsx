@@ -11,10 +11,14 @@ import { ReactComponent as CrwnLogo } from '../../assets/crown.svg';
 
 import { signOutUser } from '../../utils/firebase/firebase.utils';
 
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '../../store/user/user.selector';
+
 import './navigation.styles.scss';
 
 const Navigation = () => {
-  const { currentUser } = useContext(UserContext);
+  //const { currentUser } = useContext(UserContext);
+  const currentUser = useSelector(selectCurrentUser);
   const { isCartOpen } = useContext(CartContext);
 
   return (
