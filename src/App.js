@@ -11,14 +11,18 @@ import { useEffect } from 'react';
 import {
   onAuthStateChangedListener,
   createUserDocumentFromAuth,
+  getCategoriesAndDocuments
 } from './utils/firebase/firebase.utils';
 
 import { setCurrentUser } from './store/user/user.action';
+import { setCategory} from './store/category/category.action';
+
 import { useDispatch } from 'react-redux';
 
 const App = () => {
   const dispatch = useDispatch();//use redux dispatch
 
+  //whenever a user sign in happens, triggers dispatch of setCurrentUser
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListener((user) => {
       if (user) {
@@ -28,6 +32,17 @@ const App = () => {
     });
 
     return unsubscribe;
+  }, []);
+
+  //read categories from firebase db and trigger dispatch of setCategory
+  useEffect(() => {
+    const getCategoriesMap = async () => {
+      const categoryMap = await getCategoriesAndDocuments('categories');
+      //setCategoriesMap(categoryMap);
+      dispatch(setCategory(categoryMap));
+    };
+
+    getCategoriesMap();
   }, []);
 
   return (
