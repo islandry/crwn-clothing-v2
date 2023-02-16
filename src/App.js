@@ -15,7 +15,7 @@ import {
 } from './utils/firebase/firebase.utils';
 
 import { setCurrentUser } from './store/user/user.action';
-import { setCategory} from './store/category/category.action';
+
 
 import { useDispatch } from 'react-redux';
 
@@ -35,7 +35,8 @@ const App = () => {
   }, []);
 
   //read categories from firebase db and trigger dispatch of setCategory
-  useEffect(() => {
+  //moved this one to Shop component 
+/*   useEffect(() => {
     const getCategoriesMap = async () => {
       const categoryMap = await getCategoriesAndDocuments('categories');
       //setCategoriesMap(categoryMap);
@@ -43,7 +44,8 @@ const App = () => {
     };
 
     getCategoriesMap();
-  }, []);
+  }, []); */
+  
 
   return (
     <Routes>
