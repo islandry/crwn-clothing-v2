@@ -11,11 +11,16 @@ import {
   Price,
 } from './product-card.styles';
 
+import { useDispatch } from 'react-redux';
+import { setCartItem } from '../../store/cart/cart.action';
+
 const ProductCard = ({ product }) => {
   const { name, price, imageUrl } = product;
   const { addItemToCart } = useContext(CartContext);
 
-  const addProductToCart = () => addItemToCart(product);
+  const dispatch = useDispatch();
+  //const addProductToCart = () => addItemToCart(product);
+  const addProductToCart = () => dispatch(setCartItem({...product, addOrRemoveOrClear: 'add'}));
 
   return (
     <ProductCartContainer>
@@ -28,7 +33,7 @@ const ProductCard = ({ product }) => {
         buttonType={BUTTON_TYPE_CLASSES.inverted}
         onClick={addProductToCart}
       >
-        Add to card
+        Add to cart
       </Button>
     </ProductCartContainer>
   );
