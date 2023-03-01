@@ -9,7 +9,7 @@ export const categoriesReducer = (
   action = {}
 ) => {
   const { type, payload } = action;
-
+  console.log("category reducer runs");
   switch (type) {
     case CATEGORIES_ACTION_TYPES.SET_CATEGORIES:
       return { ...state, categories: payload };
