@@ -78,29 +78,29 @@ const itemCountAndTotalUpdate = (items) => {
 
 export const addItemToCart = (currentItems, itemToAdd) => {
   //console.log("addItemToCart action dispatched");
-  const items = addCartItem(currentItems, itemToAdd);
-  const payload = itemCountAndTotalUpdate(items);
+  const payload = addCartItem(currentItems, itemToAdd);
+  //const payload = itemCountAndTotalUpdate(items);
   return createAction(CART_ACTION_TYPES.SET_CART_ITEMS, payload);
 }
 
 export const removeItemFromCart = (currentItems, itemToRemove) => {
-  const items = removeCartItem(currentItems, itemToRemove);
-  const payload = itemCountAndTotalUpdate(items);
+  const payload = removeCartItem(currentItems, itemToRemove);
+  //const payload = itemCountAndTotalUpdate(items);
   return createAction(CART_ACTION_TYPES.SET_CART_ITEMS, payload);
 }
 
 export const clearItemFromCart = (currentItems, itemToClear) => {
-  const items = clearCartItem(currentItems, itemToClear);
-  const payload = itemCountAndTotalUpdate(items);
+  const payload = clearCartItem(currentItems, itemToClear);
+  //const payload = itemCountAndTotalUpdate(items);
   return createAction(CART_ACTION_TYPES.SET_CART_ITEMS, payload);
 }
 
 export const setIsCartOpen = (currentOpenStatus) => {
   //console.log("setIsCartOpen action dispatched");
-  console.log(currentOpenStatus);
+  //console.log(currentOpenStatus);
   const payload = {
     isCartOpen: !currentOpenStatus
   };
-  console.log(payload);
+  //console.log(payload);
   return createAction(CART_ACTION_TYPES.SET_IS_CART_OPEN, payload);
 }
