@@ -1,22 +1,22 @@
 import { createSelector } from "reselect";
 
-const cartSelector = (state) => state.cart;
+const cartReducer = (state) => { 
+  return state.cart;
+}//base reducer, will be used as input selector for the following createSelector function calls
 
-export const cartItemSelector = (state) => state.cart.cartItems;
+//run input reducer first, if the output of input reducer changes from memoization, then run the output selector
+//here "change" means not pass equality check "==="
+export const cartIsOpenSelector = createSelector(
+  [cartReducer],
+  (cart) => cart.isCartOpen
+)
 
-export const cartCountSelector = (state) => state.cart.cartCount;
-
-export const cartTotalSelector = (state) => state.cart.cartTotal;
-
-export const cartIsOpenSelector = (state) => state.cart.isCartOpen;
-
-export const selectCartItems = () => { 
-  console.log('selectCartItems run');
-  createSelector(
-    [cartSelector],
-    (cart) => cart.cartItems
-  );
-}
+export const selectCartItems = createSelector(
+    [cartReducer],
+    (cart) => {
+      return cart.cartItems;
+    }
+);
 
 export const selectCartCount = createSelector(
   [selectCartItems],

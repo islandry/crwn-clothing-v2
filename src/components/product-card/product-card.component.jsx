@@ -13,14 +13,15 @@ import {
 
 import { useDispatch, useSelector } from 'react-redux';
 import { addItemToCart } from '../../store/cart/cart.action';
-import { cartItemSelector } from '../../store/cart/cart.selector'
+import { selectCartItems } from '../../store/cart/cart.selector'
 
 const ProductCard = ({ product }) => {
   const { name, price, imageUrl } = product;
   //const { addItemToCart } = useContext(CartContext);
 
   const dispatch = useDispatch();
-  const currentItem = useSelector(cartItemSelector);
+  const currentItem = useSelector(selectCartItems);
+  //console.log(currentItem);
   //const addProductToCart = () => addItemToCart(product);
   const addProductToCart = () => dispatch(addItemToCart(currentItem, product));
 

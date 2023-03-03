@@ -15,7 +15,7 @@ const addCartItem = (cartItems, productToAdd) => {
           each
       );
   }
-
+  // console.log('add items runs', [...cartItems, {...productToAdd, quantity: 1}]);
   return [...cartItems, {...productToAdd, quantity: 1}];
 };
 
